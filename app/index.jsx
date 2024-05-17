@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TextInput, TouchableOpacity, StyleSheet, Text, View, ActivityIndicator } from "react-native";
-import {db} from '../../config'
+import {db} from './config'
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { Button, Header, Rating } from 'react-native-elements';
 import { PricingButton } from "react-native-elements/dist/pricing/PricingCard";

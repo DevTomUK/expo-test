@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-app/config
+
 # macOS
 .DS_Store
 
@@ -20,3 +20,4 @@ expo-env.d.ts
 # @end expo-cli
 
 # ADD CONFIG TO THE GITIGNORE
+app/config*

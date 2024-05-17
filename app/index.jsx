@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { TextInput, TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { TextInput, TouchableOpacity, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import {db} from './config'
 import { getDatabase, ref, set, get, child } from "firebase/database";
+import { Button, Header, Rating } from 'react-native-elements';
+import { PricingButton } from "react-native-elements/dist/pricing/PricingCard";
 
 export default function Index() {
 
@@ -9,7 +11,7 @@ export default function Index() {
 
   function create () {
 
-    const newNum = (Math.random()*100).toFixed(0)
+    const newNum= (Math.random()*100).toFixed(0)
     setCreateNum(newNum)
     // .then(()=>{
     //   alert("submitted")
@@ -20,10 +22,11 @@ export default function Index() {
   }
 
       useEffect(()=>{
-        set(ref(db, 'test/' + createNum), {
-          testRow: 'test string',
-      }, [create])
+        set(ref(db, 'test/' + inputVal), {
+          testRow: createNum,
+          anotherTest: 'user3'
       })
+      }, [createNum])
 
   function readClick () {
     const dbRef = ref(getDatabase());
@@ -42,6 +45,7 @@ export default function Index() {
   const [theme, setTheme] = useState('light')
   const [BGCol, setBGCol] = useState('#fff')
   const [textCol, setTextCol] = useState('#333')
+  const [inputVal, setInputVal] = useState('')
 
   function handleClick(){
     setCountAmount(curr => curr + 1)
@@ -72,7 +76,7 @@ export default function Index() {
       marginLeft: 'auto',
       marginRight: 'auto',
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 16,
     },
     clicker: {
       marginTop: 20,
@@ -98,8 +102,10 @@ export default function Index() {
     >
       <Text style={styles.title}>Test!</Text>
       <Text style={styles.countAmount}>{countAmount}</Text>
+      <Button><Text style={styles.clickerText}>Button</Text></Button>
       <Text style={styles.countAmount}>{createNum}</Text>
-      <TextInput style={styles.textInput}>Type here</TextInput>
+      <TextInput onChangeText={newText => setInputVal(newText)} style={styles.textInput}>Type here</TextInput>
+      <Text>{}</Text>
       <TouchableOpacity style={styles.clicker} onPress={create}><Text style={styles.clickerText}>Create</Text></TouchableOpacity>
       <TouchableOpacity style={styles.clicker} onPress={readClick}><Text style={styles.clickerText}>Read</Text></TouchableOpacity>
       <TouchableOpacity style={styles.clicker} onPress={handleTheme}><Text style={styles.clickerText}>Theme</Text></TouchableOpacity>
